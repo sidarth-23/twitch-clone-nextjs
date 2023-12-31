@@ -35,11 +35,20 @@ export async function getRecommended() {
               },
             },
           },
+          {
+            NOT: {
+              blocking: {
+                some: {
+                  blockedId: userId,
+                },
+              },
+            },
+          },
         ],
       },
     });
   } else {
-    const users = await db.user.findMany({
+    users = await db.user.findMany({
       orderBy: {
         createdAt: "desc",
       },
